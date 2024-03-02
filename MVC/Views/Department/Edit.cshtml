@@ -1,0 +1,23 @@
+﻿@model Department
+
+<form asp-action="Edit" asp-controller="Department" asp-route-id="@Model.Id" method="post">
+    <div class="row">
+        <div class="col">
+            <label asp-for="Name"></label>
+            <input class="form-control" placeholder="Name" asp-for="Name">
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="col">
+            <label asp-for="Manager"></label>
+            <input class="form-control" placeholder="Manager" asp-for="Manager">
+            <span asp-validation-for="Manager" class="text-danger"></span>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+
+@section Scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

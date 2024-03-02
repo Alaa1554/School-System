@@ -1,0 +1,38 @@
+﻿@model Course
+@{
+    SelectList selectListItems = new SelectList(ViewBag.depts, "Id", "Name");
+}
+<form asp-action="AddCourse" asp-controller="course" method="post">
+    <div class="row">
+        <div class="col">
+            <label asp-for="Name"></label>
+            <input  class="form-control" placeholder="Name" asp-for="Name">
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="col">
+            <label asp-for="Degree"></label>
+            <input  class="form-control" placeholder="Degree" asp-for="Degree">
+            <span asp-validation-for="Degree" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label asp-for="MinDegree"></label>
+            <input  class="form-control" placeholder="MinDegree" asp-for="MinDegree">
+            <span asp-validation-for="MinDegree" class="text-danger"></span>
+        </div>
+        <div class="col">
+            <label asp-for="DepartNum" for="inputState"></label>
+            <select asp-for="DepartNum" asp-items="selectListItems" id="inputState" class="form-control">
+             
+            </select>
+            <span asp-validation-for="DepartNum" class="text-danger"></span>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Add</button>
+</form>
+
+@section Scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

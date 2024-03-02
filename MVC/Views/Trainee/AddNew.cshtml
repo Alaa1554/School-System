@@ -1,0 +1,43 @@
+﻿@model TraineeDto
+@{
+    SelectList selectListItems = new SelectList(ViewBag.Depts, "Id", "Name");
+}
+<form asp-action="AddTrainee" asp-controller="trainee" method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col">
+            <label asp-for="Name"></label>
+            <input  class="form-control" placeholder="Name" asp-for="Name">
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="col">
+            <label asp-for="Address"></label>
+            <input class="form-control" placeholder="Address" asp-for="Address">
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label asp-for="Image"></label>
+            <input  class="form-control" placeholder="Image" required asp-for="Image">
+            <span asp-validation-for="Image" class="text-danger"></span>
+        </div>
+        <div class="col">
+            <label asp-for="Grade"></label>
+            <input class="form-control" placeholder="Grade" asp-for="Grade">
+            <span asp-validation-for="Grade" class="text-danger"></span>
+        </div>
+        <div class="col">
+            <label asp-for="DepartNum" for="inputState"></label>
+            <select asp-items="selectListItems" asp-for="DepartNum" id="inputState" class="form-control">
+              
+            </select>
+            <span asp-validation-for="DepartNum" class="text-danger"></span>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Add</button>
+</form>
+@section Scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+}

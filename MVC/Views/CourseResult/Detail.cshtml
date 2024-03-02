@@ -1,0 +1,11 @@
+﻿@model CourseResult
+<div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="/Images/@Model.Trainee.Image" alt="Card image cap">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Trainee.Name</h5>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Course: @Model.Course.Name</li>
+        <li class="list-group-item">Degree: @Model.Degree</li>
+    </ul>
+</div>
