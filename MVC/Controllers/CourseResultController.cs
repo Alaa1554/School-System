@@ -47,7 +47,7 @@ namespace MVC.Controllers
             {
                 var course = await _courseRepository.GetById(newCourseResult.CourseId);
                 if (newCourseResult.Degree > course.Degree)
-                    ModelState.AddModelError("", "Degree must be less than course degree");
+                    ModelState.AddModelError("", $"Degree must be less than or equal {course.Degree}");
                 else
                 {
                     await _courseResultRepository.Update(id, newCourseResult);
@@ -76,7 +76,7 @@ namespace MVC.Controllers
             {
                 var course = await _courseRepository.GetById(newCourseResult.CourseId);
                 if (newCourseResult.Degree > course.Degree)
-                    ModelState.AddModelError("", "Degree must be less than course degree");
+                    ModelState.AddModelError("", $"Degree must be less than or equal {course.Degree}");
                 else
                 {
                     await _courseResultRepository.Insert(newCourseResult);
