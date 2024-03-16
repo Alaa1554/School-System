@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MVC.Interfaces;
 using MVC.Models;
 using System.Threading.Tasks;
@@ -44,8 +45,14 @@ namespace MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _courseResultRepository.Update(id, newCourseResult);
-                return RedirectToAction("Index");
+                var course = await _courseRepository.GetById(newCourseResult.CourseId);
+                if (newCourseResult.Degree > course.Degree)
+                    ModelState.AddModelError("", "Degree must be less than course degree");
+                else
+                {
+                    await _courseResultRepository.Update(id, newCourseResult);
+                    return RedirectToAction("Index");
+                }
             }
             var courses = await _courseRepository.GetAll();
             var trainees = await _traineeRepository.GetAll();
@@ -67,8 +74,14 @@ namespace MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _courseResultRepository.Insert(newCourseResult);
-                return RedirectToAction("Index");
+                var course = await _courseRepository.GetById(newCourseResult.CourseId);
+                if (newCourseResult.Degree > course.Degree)
+                    ModelState.AddModelError("", "Degree must be less than course degree");
+                else
+                {
+                    await _courseResultRepository.Insert(newCourseResult);
+                    return RedirectToAction("Index");
+                }
             }
             var courses = await _courseRepository.GetAll();
             var trainees = await _traineeRepository.GetAll();

@@ -1,0 +1,6 @@
+﻿@model List<Course>
+
+@foreach(var course in Model)
+{
+    <option value="@course.Id" >@course.Name</option>
+}

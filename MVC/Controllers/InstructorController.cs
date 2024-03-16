@@ -39,9 +39,7 @@ namespace MVC.Controllers
         public async Task<IActionResult> GetView()
         {
             var departments= await _departmentRepository.GetAll();
-            var courses= await _courseRepository.GetAll();
             ViewBag.Departments = departments;
-            ViewBag.Courses = courses;
             return View("AddNew");
         }
         [HttpPost]
@@ -54,9 +52,7 @@ namespace MVC.Controllers
                 return RedirectToAction("Index");
             }
             var departments = await _departmentRepository.GetAll();
-            var courses = await _courseRepository.GetAll();
             ViewBag.Departments = departments;
-            ViewBag.Courses = courses;
             return View("AddNew",instructor);
         }
         public async Task<IActionResult> GetEditView(int id)
@@ -65,9 +61,7 @@ namespace MVC.Controllers
             InstructorDto dto=new InstructorDto();
             _mapper.Map(instructor, dto);
             var departs= await _departmentRepository.GetAll();
-            var courses= await _courseRepository.GetAll();
             ViewBag.Departments = departs;
-            ViewBag.Courses = courses;
             ViewBag.Instructor=instructor;
             return View("Edit",dto);
         }
@@ -81,9 +75,7 @@ namespace MVC.Controllers
                 return RedirectToAction("Index");
             }
             var departments = await _departmentRepository.GetAll();
-            var courses = await _courseRepository.GetAll();
             ViewBag.Departments = departments;
-            ViewBag.Courses = courses;
             ViewBag.Instructor = await _instructorRepository.GetById(id);
             return View("Edit",newInstructor);
         }

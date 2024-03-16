@@ -77,6 +77,11 @@ namespace MVC.Controllers
             await _courseRepository.Delete(id);
             return RedirectToAction("Index");
         }
+        public async Task<IActionResult> GetCoursesByDeptId(int deptId)
+        {
+            var courses=await _courseRepository.GetByDeptId(deptId);
+            return PartialView("_CoursesByDeptIdPartial", courses);
+        }
        
     }
 }

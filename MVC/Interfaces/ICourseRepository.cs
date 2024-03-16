@@ -6,6 +6,7 @@ namespace MVC.Interfaces
 {
     public interface ICourseRepository
     {
+        Task<IEnumerable<Course>> GetByDeptId(int deptId);
         Task<IEnumerable<Course>> GetAll();
         Task<Course> GetById(int id);
         Task Insert(Course course);

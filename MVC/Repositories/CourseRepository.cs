@@ -1,8 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MVC.Data;
 using MVC.Interfaces;
 using MVC.Models;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace MVC.Repositories
@@ -27,7 +29,10 @@ namespace MVC.Repositories
         {
             return await _context.Courses.Include(c=>c.Department).ToListAsync();
         }
-
+        public async Task<IEnumerable<Course>> GetByDeptId(int deptId)
+        {
+            return await _context.Courses.Where(c => c.DepartNum == deptId).ToListAsync();
+        }
         public async Task<Course> GetById(int id)
         {
             return await _context.Courses.Include(c=>c.Department).FirstOrDefaultAsync(c => c.Id == id);

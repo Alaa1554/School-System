@@ -22,13 +22,13 @@ namespace MVC.Models
         [ForeignKey("Department")]
         [Display(Name = "Department")]
         [Required]
-        [Range(1, int.MaxValue, ErrorMessage = "DepartmentId must be more than 0")]
+        [Range(1, int.MaxValue, ErrorMessage = "This field is required")]
         public int DepartId { get; set; }
         public Department Department { get; set; }
         [ForeignKey("Course")]
         [Display(Name = "Course")]
         [Required]
-        [Range(1, int.MaxValue, ErrorMessage = "CourseId must be more than 0")]
+        [Range(1, int.MaxValue, ErrorMessage = "This field is required")]
         public int CourseId { get; set; }
         public Course Course { get; set; }
     }

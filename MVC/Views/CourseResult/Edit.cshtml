@@ -4,6 +4,7 @@
     SelectList selectListCourses = new SelectList(ViewBag.Courses, "Id", "Name");
 }
 <form asp-action="Edit" asp-controller="CourseResult" asp-route-id="@Model.Id" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
     <div class="row">
         <div class="col">
             <label asp-for="Degree"></label>
@@ -30,6 +31,5 @@
 
 
 @section Scripts{
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <partial name="_ValidationScriptsPartial" />
 }

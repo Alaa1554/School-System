@@ -1,7 +1,6 @@
 ﻿@model InstructorDto
 @{
     SelectList selectListDeptItems = new SelectList(ViewBag.Departments, "Id", "Name");
-    SelectList selectListCourseItems = new SelectList(ViewBag.Courses, "Id", "Name");
 }
 <form asp-action="Edit" asp-controller="instructor" asp-route-id="@ViewBag.Instructor.Id" method="post" enctype="multipart/form-data">
     <div class="row">
@@ -31,14 +30,14 @@
             <span asp-validation-for="Salary" class="text-danger"></span>
         </div>
         <div class="col">
-            <label asp-for="DepartId" for="inputState"></label>
-            <select asp-for="DepartId" asp-items="selectListDeptItems" id="inputState" class="form-control">
+            <label asp-for="DepartId"></label>
+            <select asp-for="DepartId" asp-items="selectListDeptItems" id="DeptID" class="form-control" onchange="GetCourses()">
             </select>
             <span asp-validation-for="DepartId" class="text-danger"></span>
         </div>
         <div class="col">
-            <label asp-for="CourseId" for="inputState"></label>
-            <select asp-for="CourseId" asp-items="selectListCourseItems" id="inputState" class="form-control">
+            <label asp-for="CourseId"></label>
+            <select asp-for="CourseId" id="CourseId" class="form-control">
             </select>
             <span asp-validation-for="CourseId" class="text-danger"></span>
         </div>
@@ -47,6 +46,21 @@
 </form>
 
 @section Scripts{
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function () {
+            GetCourses();
+        });
+        function GetCourses() {
+            var deptId = document.getElementById("DeptID").value;
+            $.ajax({
+                url: "/course/GetCoursesByDeptId/",
+                data: { "deptId": deptId },
+                success: function (result) {
+                    document.getElementById("CourseId").innerHTML = result;
+                }
+            })
+        }
+
+    </script>
 }
